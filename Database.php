@@ -4,10 +4,15 @@ class Database {
 
  public $connection;
 
- public function __construct()
+ public function __construct($config, $username = 'root', $password = '')
  {
-  $dsn = 'mysql:host=localhost;dbname=php_for_beginners;user=root;password=;charset=utf8mb4;port=3306;';
-  $this->connection = new PDO($dsn);
+
+  $dsn = 'mysql:' . http_build_query($config, '', ';');
+
+  $this->connection = new PDO($dsn, $username, $password, [
+   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+   PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+  ]);
  }
 
  public function query($sql)

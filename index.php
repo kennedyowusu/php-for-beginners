@@ -6,10 +6,8 @@ require_once('router.php');
 
 require_once('Database.php');
 
-$db = new Database();
+$config = require_once('config.php');
 
-$queryStatement = $db->query('SELECT * FROM posts')->fetchAll(PDO::FETCH_ASSOC);
+$db = new Database($config['database']);
 
-foreach ($queryStatement as $post) {
- echo $post['description'] . '<br>';
-}
+$queryStatement = $db->query('SELECT * FROM posts')->fetchAll();

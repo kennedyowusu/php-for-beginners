@@ -10,4 +10,14 @@ $config = require_once('config.php');
 
 $db = new Database($config['database']);
 
-$queryStatement = $db->query('SELECT * FROM posts')->fetchAll();
+$id = $_GET['id'];
+
+$query = "SELECT * FROM posts WHERE id = :id";
+
+$queryStatement = $db->query($query, [':id' => $id])->fetch();
+
+echo '<pre>';
+print_r($queryStatement);
+echo '</pre>';
+
+?>

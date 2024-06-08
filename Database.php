@@ -15,10 +15,11 @@ class Database {
   ]);
  }
 
- public function query($sql)
+ public function query($sql, $parameters = [])
  {
   $statement = $this->connection->prepare($sql);
-  $statement->execute();
+
+  $statement->execute($parameters);
 
   return $statement;
  }

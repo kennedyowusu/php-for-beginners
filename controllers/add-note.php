@@ -9,17 +9,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $title = $_POST['title'];
   $body = $_POST['body'];
 
-  if (empty($title) || empty($body)) {
-    $error = 'Please fill in all fields.';
+  $errors = [];
+
+  if (empty($title)) {
+    $errors[] = 'Title is required.';
+  } else if (strlen($title) < 3) {
+    $errors[] = 'Title must be at least 3 characters.';
+  } else if (strlen($title) > 255) {
+    $errors[] = 'Title must be less than 255 characters.';
+  } else if (empty($body)) {
+    $errors[] = 'Body is required.';
+  } else if (strlen($body) < 3) {
+    $errors[] = 'Body must be at least 3 characters.';
+  } else if (strlen($body) > 16777215) {
+    $errors[] = 'Body must be less than 16777215 characters.';
   } else {
-    // $query = $pdo->prepare('INSERT INTO notes (title, body,  user_id) VALUES (:title, :body, :user_id)');
-    // $query->bindParam('title', $title);
-    // $query->bindParam('body', $body);
-    // $query->bindParam('user_id', $_SESSION['user_id']);
-    // $query->execute();
-
-    // header('Location: /php/notes');
-
     $db->query('INSERT INTO notes (title, body, user_id) VALUES (:title, :body, :user_id)', array(':title' => $title, ':body' => $body,
     ':user_id' => 2));
   }

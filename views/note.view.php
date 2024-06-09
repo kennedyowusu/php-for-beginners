@@ -14,8 +14,10 @@
       hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer
     ">
       <div class="px-4 py-5 sm:p-6">
-        <!-- <h3 class="text-lg font-medium text-gray-900"><?php echo $note['title'] ?></h3> -->
-        <p class="mt-1 text-sm text-gray-500"><?php echo $note['body'] ?></p>
+        <!-- <h3 class="text-lg font-medium text-gray-900"><?= $note['title'] ?></h3> -->
+        <p class="mt-1 text-sm text-gray-500">
+          <p><?= $note['body'] ?></p>
+        </p>
       </div>
     </div>
 

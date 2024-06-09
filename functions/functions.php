@@ -6,3 +6,7 @@ function activeUrl($path) {
 // function activeTitle($title) {
 //  return $GLOBALS['title'] === $title ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white';
 // }
+
+function authorize($condition, $status = Response::FORBIDDEN) {
+ if (! $condition) $status;
+}

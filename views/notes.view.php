@@ -15,9 +15,7 @@
     <?php else: ?>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <?php foreach ($notes as $note): ?>
-          <a href="/php/note?id=
-            <?= $note['id'] ?>
-          ">
+          <a href="/php/note?id=<?= $note['id'] ?>">
           <div class="bg-white overflow-hidden shadow rounded-lg
             hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer
           ">

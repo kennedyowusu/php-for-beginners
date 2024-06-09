@@ -3,6 +3,7 @@
 class Database {
 
  public $connection;
+ public $statement;
 
  public function __construct($config, $username = 'root', $password = '')
  {
@@ -10,17 +11,38 @@ class Database {
   $dsn = 'mysql:' . http_build_query($config, '', ';');
 
   $this->connection = new PDO($dsn, $username, $password, [
-   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+   // PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
   ]);
  }
 
- public function query($sql, $parameters = [])
+ public function query($query, $params = [])
  {
-  $statement = $this->connection->prepare($sql);
+     $this->statement = $this->connection->prepare($query);
 
-  $statement->execute($parameters);
+     $this->statement->execute($params);
 
-  return $statement;
+     return $this;
+ }
+
+ public function get()
+ {
+     return $this->statement->fetchAll();
+ }
+
+ public function find()
+ {
+     return $this->statement->fetch();
+ }
+
+ public function findOrFail()
+ {
+     $result = $this->find();
+
+     if (! $result) {
+      session_abort();
+     }
+
+     return $result;
  }
 }

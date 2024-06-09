@@ -40,7 +40,7 @@ class Database {
      $result = $this->find();
 
      if (! $result) {
-      session_abort();
+      abort();
      }
 
      return $result;
